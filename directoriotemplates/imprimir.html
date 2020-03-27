@@ -1,0 +1,40 @@
+{% extends "padre.html" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="./css/imprimir.css" media="screen" />
+
+{% endblock %}
+
+{% block central %}
+<div class= "evento clearfix">
+
+         
+    <div class="im2">
+       <img src="holilife1.jpg" width="300px"> 
+       <p>{{ textoimagen1 }}</p>
+       <img src="holilife2.jpg" width="300px">
+       <p>{{ textoimagen2 }}</p>
+   </div>
+   <h1>{{ titulo }}</h1>
+    <h2>{{ organizador }}</h2> 
+    <h3>{{ fecha }}</h3>
+    <p>
+        {{ descripcion1 }}
+    </p>
+    <p>
+        {{ descripcion2 }}
+    </p> 
+    
+
+</div>
+
+<div class="botonlink">
+   <a href="https://www.holilife.es/que-es-holi" target="_blank">Web oficial: https://www.holilife.es/que-es-holi</a>
+   
+   
+</div>
+<div class="botonlink">
+   <a href="http://www.a38.es/" target="_blank">Web organizador: http://www.a38.es/ </a>
+</div>
+
+{% endblock %}

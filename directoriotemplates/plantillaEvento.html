@@ -1,0 +1,155 @@
+{% extends "padre.html" %}
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block scriptcoments %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="./javascripts/Comentarios.js"></script>
+    <script type="text/javascript" src="./javascripts/validacion.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+   
+    
+{% endblock %}
+
+{% block scriptgaleria %}
+
+<script type="text/javascript" src="./javascripts/galeria.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/galeria.css" media="screen" />
+
+{% endblock %}
+
+{% block central %}
+<div class= "evento clearfix">
+    <h1>{{ evento['titulo'] }}</h1>
+    <h2>{{ evento['organizador'] }}</h2> 
+    <h3>{{ evento['fecha'] }}</h3>
+
+    <div class="im2">
+        <img src="{{ evento['im1'] }}" width="300px"> 
+        <p>{{ evento['textoim1'] }}</p>
+        <img src="{{ evento['im2'] }}" width="300px">
+        <p>{{ evento['textoim2'] }}</p>
+    </div>
+
+    <p>
+        {{ evento['desc1'] }}
+    </p>
+    <p>
+        {{ evento['desc2'] }}
+    </p> 
+    
+    <div class="botones clearfix">
+       
+        <div class="botonlink">
+            <a href= "{{ evento['web'] }}" target="_blank">Vista la web oficial</a>
+            <a href="{{ evento['organizadorweb'] }}" target="_blank">Visita web organizador</a>
+            
+        </div>
+
+        <div class="botonmedia">
+            <a href="{{ evento['twitter'] }}" class="fa fa-twitter"></a>
+            <a href="{{ evento['Face'] }}" class="fa fa-facebook"></a>
+        </div>
+    </div>
+    
+    <div class="imprimir">
+        <a href="evento imprimir.html" target="_blank">Imprimir</a>
+    </div>
+    
+ 
+
+</div>
+
+
+
+{% endblock %}
+
+
+{% block comentarios %}
+
+<div id="mySidebar" class="comentarios">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <div id="zonacoments">
+        {% for comentario in comentarios %}
+       <div id="com1" class="clearfix">
+           <div class="distintivos">
+                <img src="./img/persona.png"> <p>  {{ comentario['nombre'] }}</p>
+                <img src="./img/calendario.png"> <p> {{ comentario['fecha'] }}</p>
+                <div id="hora">
+                    <img src="./img/hora.png"> <p > {{ comentario['hora'] }}</p>
+
+                </div>
+           </div>
+           <div class="zonatext">
+                <p>Comentario:</p>
+                <p>
+                    {{ comentario['comentario'] }}
+                </p>
+           </div>
+        
+       </div>
+
+       {% endfor %}
+      
+  
+
+    </div>
+    <form  class="formcoment" id="myform"  action="javascript:void(0)" method="post"  >
+        <p>Nombre: </p>
+         <input type="text" id="nombre" name="nombre" placeholder="Introduce tu nombre" size="40">
+
+        <p id="demo"> </p>
+        <p>Email:</p>
+         <input type="email" id="mail" name="mail" placeholder="Introduce tu mail" size="40">
+         <span class="error" aria-live="polite"></span>
+        <p>Comentario: </p>
+        <textarea onkeyup="mandaProhibidas()" id="comentario" name="comentarios" rows="10" cols="40" placeholder="Escribe aqui tu comentario"></textarea>
+        <input type ="hidden" id ="id" value=" {{ evento['id'] }}">
+        <p>
+          <input type="submit" id ="btnEnviar" onclick="validateForm()" value="Enviar">
+          
+        </p>
+    
+      </form>
+  </div>
+
+  
+
+  <div id="main">
+    <div class="openbtn" onclick="openNav()"><img src="./img/comentario.png" width="12%" height="12%"></div>  
+   
+  </div>
+
+  
+
+{% endblock %}
+
+
+{% block galeria %}
+
+<div class="container">
+    <div id="galeria" class="sidepanel">
+        <a href="javascript:void(0)" class="cerrar" onclick="cerrar()">&times;</a>
+        <div id="zonagaleria" class="clearfix">
+            {% for imagen in galeria %}
+            <div class="galeria" class="clearfix">
+                <a target="_blank" href="{{ imagen['ruta'] }}">
+                    <img src="{{ imagen['ruta'] }}" alt="Img">
+                  </a>
+                  
+            </div>
+           {% endfor %}
+        </div>
+  
+      </div>
+      
+      <button class="abrir" onclick="abrir()">&#9776; Galeria</button>
+</div>
+
+
+{% endblock  %}

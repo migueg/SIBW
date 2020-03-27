@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head >
+        <meta charset="utf-8">
+        <title>Practica3</title>
+        {% block css %}
+        <link rel="stylesheet" type="text/css" href="./css/estilo.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="./css/comentarios.css" media="screen" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        {% endblock %}
+
+        {% block scriptcoments %}{% endblock %}
+        {% block scriptgaleria %}{% endblock %}
+    </head>
+    <body>
+        <header class="clearfix" >
+            <div id="logo"><img src="./img/logo.png" width="100" heigt="50"></div>
+            <h1>CRAZY OCIO</h1>
+
+            <div class="topnav clearfix">
+                <a href="#">Link</a>
+                <a href="#">Link</a>
+                <a href="#">Link</a>
+            </div>
+        </header>
+        <div class="clearfix">
+            <aside>
+                <div class="sidebar">
+                    <a href="index.php">Home</a>
+                    <a href="#"> Services</a>
+                    <a href="#"> Clients</a>
+                    <a href="#">Contact</a>
+            </div>
+    
+            </aside>
+            <main>
+                {% block central %}{% endblock %}
+                {% block comentarios %}{% endblock %}
+                {% block galeria %}{% endblock %}
+            </main>
+    
+        </div>
+      
+        <footer class="footer clearfix">
+            <h3>Crazy ocio s.a</h3>
+            <div class="copy">© 2020 Copyright Text</div>
+            <div class="movil">Contacto: 0000000000</div>
+            
+        </footer>
+    </body>
+ 
+</html>
