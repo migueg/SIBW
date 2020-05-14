@@ -1,0 +1,43 @@
+{% extends "padre.html" %}
+
+{% block css %}
+    {{ parent() }}
+<link rel="stylesheet" type="text/css" href="./css/login.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="./css/listaComents.css" media="screen" />
+
+{% endblock %}
+
+{% block login %}
+
+<div class = "login ">
+   
+    <p>{{ user.usuario }}</p>
+    <a href= "logout.php"><img src="./img/cerrarSesion.png" width="20px" alt="Cerrar sesion"></a>
+   
+</div>
+
+{% endblock %}
+{% block moderador %}
+<div class="tabla">
+    <table>
+        <tr style="text-align: center;font-weight:bold ;">
+            <td> Nombre</td>
+            <td> Fecha</td>
+            <td> Hora</td>
+            <td> Comentario</td>
+            <td> Mail</td>
+            <td> IdEvento</td>
+        </tr>
+        {% for comentario in comentarios %}
+            <tr>
+                <td> {{ comentario['nombre'] }}</td>
+                <td> {{ comentario['fecha'] }}</td>
+                <td> {{ comentario['hora'] }}</td>
+                <td> {{ comentario['comentario'] }}</td>
+                <td> {{ comentario['mail'] }}</td>
+                <td> <a style="color: seashell;" href="plantillaEvento.php?ev={{ comentario['id'] }}">{{ comentario['id'] }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

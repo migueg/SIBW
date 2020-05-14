@@ -1,0 +1,65 @@
+{% extends "padre.html" %}
+
+{% block css %}
+    {{ parent() }}
+<link rel="stylesheet" type="text/css" href="./css/gestor.css" media="screen" />
+<script type="text/javascript" src="./javascripts/gestor.js"></script>
+
+{% endblock %}
+{% block login %}
+
+<div class = "login ">
+   
+    <p>{{ user.usuario }}</p>
+    <a href= "logout.php"><img src="./img/cerrarSesion.png" width="20px" alt="Cerrar sesion"></a>
+   
+</div>
+
+{% endblock %}
+
+
+{% block gestor %}
+{% if user.rol =="gestor" %}
+{% if not msg %}
+<div class="clearfix evento" id="inisesion">
+    <h1>Añadir Nuevo Evento</h1>
+
+    <form action="añadir.php" method="post" enctype="multipart/form-data">
+    Titulo: <input type="text" name="titulo" id="title"/><br>
+    Organizador: <input type="text" name="organizador" id="org"/><br>
+    Fecha: <input type="date" name="fecha" id="date"/><br>
+    Imagen 1: <input type="file" name="imagen1" id="im1"/><br>
+    {% if errores.e1 %}
+    {% for e in errores.e1 %}
+    <span style="color: red;">*{{ e }}</span><br>
+    {% endfor %}
+    {% endif %}
+    Titulo imagen 1: <input type="text" name="titulo1" id="t1"/><br>
+    Imagen 2: <input type="file" name="imagen2" id="im2"/><br>
+    {% if errores.e2 %}
+    {% for e in errores.e2 %}
+    <span style="color: red;">*{{ e }}</span><br>
+    {% endfor %}
+    {% endif %}
+    Titulo imagen 2: <input type="text" name="titulo2" id="t2"/><br>
+    <p>Descripcion 1:</p><textarea id="d1" name="des1"></textarea><br>
+    <p>Descripcion 2:</p><textarea id="d2" name="des2"></textarea><br>
+    Web Evento: <input type="url" name="web" id="webEvento"/><br>
+    Web Organizador: <input type="url" name="webOrg" id="weborg"/><br>
+    Dirección Twitter: <input type="url" name="twit" id="twitter"/><br>
+    Dirección Facebook: <input type="url" name="face" id="facebook"/><br>
+    Etiquetas: <input type="text" name="etq" placeholder="Las etiquetas empiezan con # y van sepaados por espacios" id="etiquetas"/><br>
+    <input type="submit" id="boton" onclick="validaAñadir()" value="Enviar" />
+    </form>
+  
+ 
+   
+</div>
+{% else %}
+<div class="mensaje">
+    <p>{{ msg }}</p>
+</div>
+{% endif %}
+
+{% endif %}
+{% endblock %}

@@ -10,3 +10,27 @@ function openNav() {
 
 //Document es un puntero a la página web
 
+ function deleteComent(url){
+  
+   if(!confirm("AVISO!!!,vas a realizar un borrado, ¿Estas seguro?")){
+     return false;
+   }else{
+     document.location=url;
+     return true;
+   }
+  
+   
+  }
+
+
+  function comprobarComent(){
+    var coment = document.getElementById('comentario').value;
+    var antiguo = document.getElementById('antiguo').value;
+    console.log(antiguo);
+    var submit = document.getElementById('boton');
+    if(antiguo == coment){
+      submit.setCustomValidity("No has modificado nada");
+    }else{
+      submit.setCustomValidity("");
+    }
+  }

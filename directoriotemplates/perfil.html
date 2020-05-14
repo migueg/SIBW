@@ -1,0 +1,65 @@
+{% extends "padre.html" %}
+
+{% block css %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="./css/perfil.css" media="screen" />
+    <script type="text/javascript" src="./javascripts/registro.js"></script>
+
+{% endblock %}
+
+{% block login %}
+
+
+<div class = "login ">
+    {% if not user %}
+    <a href= "login.php">Inicia sesion</a>
+    {% else %}
+    <a href ="perfil.php" > {{ user['usuario'] }} </a>
+    <a href= "logout.php"><img src="./img/cerrarSesion.png" width="20px" alt="Cerrar sesion"></a>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block perfil %}
+
+<div class="perfil">
+    <div class="clearfix" id="inisesion">
+        <h2>Tus datos:</h2>
+        <form action="perfil.php" method="post" >
+        Usuario: <input type="text" name="nick" value="{{ datos['nick'] }}"/><br>
+        Mail: <input type="email" name="mail" value="{{ datos['mail'] }}" /><br>
+        Nombre: <input type="text" name="name" value="{{ datos['nombre'] }}"/><br>
+        Apellidos: <input type="text" name="apellidos" value="{{ datos['apellidos'] }}"/><br>
+        Fecha Nacimiento: <input type="date" name="fecha" value="{{ datos['nacimiento'] }}"/><br>
+        <input type="submit" id="boton"  value="Editar" />
+        </form>
+        {% if not existe['existe'] %}
+        <span style="color:red">*El nombre de usuario ya existe</span>
+        {% else %}
+        <span style="color:rgb(0, 255, 76)">*Tus datos se encuentran actualizados</span>
+        {% endif %}
+    
+    </div>
+</div>
+
+<div class="password">
+    <div id="inisesion">
+    <h2>Modificar contraseña:</h2>
+    <form action="perfil.php" method="POST">
+        Antigua contraseña: <input type="password" id='vieja' name="lastpass"><br>
+        Nueva contraseña: <input type="password" id='nueva' name="pass"><br>
+        Repita la nueva contraseña: <input type="password" id='renueva' name="repass"><br>
+        <input type="submit" id="boton2" onclick= validaPassword() value="Cambiar password" />
+        {% if  existe['contraseña'] %}
+        <span style="color:red">*Tu contraseña antigua no coincide</span>
+        {% endif %}
+        {% if  existe['exito'] %}
+        <span style="color:rgb(0, 255, 76)">*contraseña modificada</span>
+        {% endif %}
+
+       
+    </form>
+    </div>
+</div>
+{% endblock %}

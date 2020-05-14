@@ -3,7 +3,18 @@
 {% block css %}
     {{ parent() }}
 {% endblock %}
+{% block login %}
 
+<div class = "login ">
+    {% if not user %}
+    <a href= "login.php">Inicia sesion</a>
+    {% else %}
+    <a href ="perfil.php" > {{ user['usuario'] }} </a>
+    <a href= "logout.php"><img src="./img/cerrarSesion.png" width="20px" alt="Cerrar sesion"></a>
+    {% endif %}
+</div>
+
+{% endblock %}
 {% block scriptcoments %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="./javascripts/Comentarios.js"></script>
@@ -25,10 +36,16 @@
 
 {% block central %}
 <div class= "evento clearfix">
+    {% if user.rol == "gestor" %}
+    <div class="gestor">
+        <a href="javascript:" onclick="deleteComent('borrarEvento.php?ev={{ evento['id'] }}')"><img id='borrar' src="./img/borrar.png"  width="40px"></a>
+        <a href="editarEvento.php?ev={{ evento['id'] }}" id="edit" > <img src="./img/editar.png" width="40px"> </a>
+       </div>
+    {% endif %}
     <h1>{{ evento['titulo'] }}</h1>
     <h2>{{ evento['organizador'] }}</h2> 
     <h3>{{ evento['fecha'] }}</h3>
-
+    <h4>{{ evento['etq'] }}</h4>
     <div class="im2">
         <img src="{{ evento['im1'] }}" width="300px"> 
         <p>{{ evento['textoim1'] }}</p>
@@ -84,7 +101,14 @@
                     <img src="./img/hora.png"> <p > {{ comentario['hora'] }}</p>
 
                 </div>
+               
            </div>
+           {% if user.rol == "moderador" %}
+           <div class="moderador">
+            <a href="javascript:" onclick="deleteComent('moderar.php?nombre={{ comentario['nombre'] }}&fecha={{ comentario['fecha'] }}&hora={{ comentario['hora'] }}&opcion=1&id={{ evento['id'] }}')"><img id='borrar' src="./img/borrar.png"  width="20px"></a>
+            <a href="moderar.php?nombre={{ comentario['nombre'] }}&fecha={{ comentario['fecha'] }}&hora={{ comentario['hora'] }}&opcion=2&id={{ evento['id'] }}" id="edit" > <img src="./img/editar.png" width="20px"> </a>
+           </div>
+           {% endif %}
            <div class="zonatext">
                 <p>Comentario:</p>
                 <p>
@@ -110,12 +134,18 @@
         <p>Comentario: </p>
         <textarea onkeyup="mandaProhibidas()" id="comentario" name="comentarios" rows="10" cols="40" placeholder="Escribe aqui tu comentario"></textarea>
         <input type ="hidden" id ="id" value=" {{ evento['id'] }}">
+       
+    {% if user.rol == "registrado" or user.rol=="moderador" %}
         <p>
           <input type="submit" id ="btnEnviar" onclick="validateForm()" value="Enviar">
           
         </p>
-    
+    {% else %}
+        <br>
+        <span style="color: red;">*Debes iniciar sesion para comentar</span>
+        {% endif %}
       </form>
+    
   </div>
 
   

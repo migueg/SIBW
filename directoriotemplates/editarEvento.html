@@ -1,0 +1,72 @@
+{% extends "padre.html" %}
+
+{% block css %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="./css/gestor.css" media="screen" />
+
+{% endblock %}
+
+{% block login %}
+
+<div class = "login ">
+    {% if not user %}
+    <a href= "login.php">Inicia sesion</a>
+    {% else %}
+    <a href ="perfil.php" > {{ user['usuario'] }} </a>
+    <a href= "logout.php"><img src="./img/cerrarSesion.png" width="20px" alt="Cerrar sesion"></a>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+
+{% block gestor %}
+{% if user.rol == "gestor" %}
+
+{% if msg %}
+<div class="mensaje">
+    <p>{{ msg }}</p>
+</div>
+{% else %}
+<div class="clearfix evento" id="inisesion">
+    <h1>Editar </h1>
+
+    <form action="editarEvento.php?ev={{ evento['id'] }}" method="post" enctype="multipart/form-data">
+    Titulo: <input type="text" name="titulo" id="title" value="{{ evento['titulo'] }}"/><br>
+    Organizador: <input type="text" name="organizador" id="org" value="{{ evento['organizador'] }}"/><br>
+    Fecha: <input type="date" name="fecha" id="date" value="{{ evento['fecha'] }}"/><br>
+    Imagen 1: <br><img src="{{ evento['im1'] }}" width="170px"><br>
+    <input type="text" style="display: none;" name="antigua1" value="{{ evento['im1'] }}">
+    Editar imagen1: <input type="file" name="imagen1" id="im1"/><br>
+    {% if errores.e1 %}
+    {% for e in errores.e1 %}
+    <span style="color: red;">*{{ e }}</span><br>
+    {% endfor %}
+    {% endif %}
+    Titulo imagen 1: <input type="text" name="titulo1" id="t1" value="{{ evento['textoim1'] }}"/><br>
+    <p>Imagen 2:</p><img src="{{ evento['im2'] }}" width="170px"><br>
+    <input type="text" style="display: none;" name="antigua2" value="{{ evento['im2'] }}">
+    Editar Imagen 2: <input type="file" name="imagen2" id="im2"/><br>
+    {% if errores.e2 %}
+    {% for e in errores.e2 %}
+    <span style="color: red;">*{{ e }}</span><br>
+    {% endfor %}
+    {% endif %}
+    Titulo imagen 2: <input type="text" name="titulo2" id="t2" value="{{ evento['textoim2'] }}"/><br>
+    <p>Descripcion 1:</p><textarea id="d1" name="des1" >{{ evento['desc1'] }}</textarea><br>
+    <p>Descripcion 2:</p><textarea id="d2" name="des2">{{ evento['desc2'] }}</textarea><br>
+    Web Evento: <input type="url" name="web" id="webEvento" value="{{ evento['web'] }}"/><br>
+    Web Organizador: <input type="url" name="webOrg" id="weborg" value="{{ evento['organizadorweb'] }}"/><br>
+    Dirección Twitter: <input type="url" name="twit" id="twitter" value="{{ evento['twitter'] }}"/><br>
+    Dirección Facebook: <input type="url" name="face" id="facebook" value="{{ evento['Face'] }}"/><br>
+    Etiquetas: <input type="text" name="etq" id="etiquetas" value="{{ evento['etq'] }}"/><br>
+    Subir imágenes a galeria: <input type="file" id="archivo[]" name="archivo[]" multiple="">;
+    <input type="submit" id="boton" onclick="validaAñadir()" value="Enviar" />
+    </form>
+  
+ 
+   
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}

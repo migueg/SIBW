@@ -2,6 +2,8 @@
 
 {% block css %}
     {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="./css/gestor.css" media="screen" />
+
 {% endblock %}
 
 {% block login %}
@@ -10,25 +12,16 @@
     {% if not user %}
     <a href= "login.php">Inicia sesion</a>
     {% else %}
-    <p>{{ user.user }}</p>
+    <a href ="perfil.php" > {{ user['usuario'] }} </a>
     <a href= "logout.php"><img src="./img/cerrarSesion.png" width="20px" alt="Cerrar sesion"></a>
     {% endif %}
 </div>
 
 {% endblock %}
-{% block central %}
-<div class= "centro clearfix">
-    
-    {% for evento in eventos %}
-    <div class="im1">
-        
-        <a href="{{ evento.ruta }}?ev={{ evento.id }}"><img src="{{ evento['img'] }}" height="100px"></a>
-        <p>{{ evento['titulo'] }}</p>
-        
-    </div>
-    
-    {% endfor %}
 
+
+{% block gestor %}
+<div class="mensaje">
+    <p>{{ msg }}</p>
 </div>
-
 {% endblock %}

@@ -14,10 +14,10 @@ function getEvento($idEv, $mysqli){
         $evento = array('id'=>$row['id'],'titulo' => $row['titulo'], 'organizador' => $row['organizador'],
         'fecha' => $row['fecha'], 'im1' => $row['im1'], 'im2' => $row['im2'], 'textoim1' => $row['textoim1'],'textoim2' => $row['textoim2'],
         'desc1' =>$row['descripcion1'], 'desc2' =>$row['descripcion2'], 'web' =>$row['enlaceweb'], 'organizadorweb'=>$row['enlaceorganizador'] ,
-        'twitter' =>$row['enlaceTwitter'], 'Face' =>$row['enlaceFace']);
+        'twitter' =>$row['enlaceTwitter'], 'Face' =>$row['enlaceFace'], 'etq' =>$row['etiquetas']);
     }
 
-    if(!$row) exit('DETECCIÓN DE INYECCIÓN');
+    if(!$row) exit('DETECCIÓN DE  INYECCIÓN');
     return $evento;
     $stmt->close();
 }
@@ -46,7 +46,7 @@ function getListaComents(  $idEv , $mysqli){
     while ($fila = $consulta->fetch_assoc()){
         $com[] = $fila;
     }
-    if(!$com) exit('DETECCIÓN DE INYECCIÓN');
+   //if(!$com) exit('DETECCIÓN DE fdf INYECCIÓN');
 
     //$coments = array_reverse($com);
     return $com;
@@ -69,4 +69,23 @@ function getGaleria($mysqli, $idEv){
 
     $stmt->close();
 }
+
+function getAllComents($mysqli){
+    $stmt = $mysqli->prepare("SELECT * FROM comentarios  ORDER BY fecha, hora ASC");
+    $stmt->execute();
+    $consulta = $stmt->get_result();
+    $com = array();
+
+    while ($fila = $consulta->fetch_assoc()){
+        $com[] = $fila;
+    }
+    
+
+    //$coments = array_reverse($com);
+    $stmt->close();
+    return $com;
+   
+}
+
+
 ?>

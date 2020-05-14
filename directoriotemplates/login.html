@@ -1,0 +1,23 @@
+{% extends "padre.html" %}
+
+{% block css %}
+    {{ parent() }}
+<link rel="stylesheet" type="text/css" href="./css/login.css" media="screen" />
+
+{% endblock %}
+
+{% block iniciosesion %}
+<div class="clearfix" id="inisesion">
+    <form action="login.php" method="post" >
+    Usuario: <input type="text" name="nick"/><br>
+    Password: <input type="password" name="contraseña" /><br>
+    <input type="submit" id="boton"  value="Loguearse" />
+    </form>
+    {% if not registro %}
+    <span style="color:red">*No estas registrado</span>
+    {% endif %}
+
+ 
+    <a href="registro.php">Registrarse</a>
+</div>
+{% endblock %}

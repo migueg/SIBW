@@ -1,0 +1,55 @@
+{% extends "padre.html" %}
+{% block css %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="./css/gestor.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="./css/login.css" media="screen" />
+<script type="text/javascript" src="./javascripts/super.js"></script>
+
+
+{% endblock %}
+
+{% block login %}
+
+<div class = "login ">
+{% if not user %}
+<a href= "login.php">Inicia sesion</a>
+{% else %}
+<a href ="perfil.php" > {{ user['usuario'] }} </a>
+<a href= "logout.php"><img src="./img/cerrarSesion.png" width="20px" alt="Cerrar sesion"></a>
+{% endif %}
+</div>
+
+{% endblock %}
+
+
+{% block super %}
+{% if mensaje %}
+<div class="mensaje">
+    <p>{{ mensaje }}</p>
+
+</div>
+{% else %}
+<div class="clearfix" id="inisesion">
+    <p>Usuario: {{ usuario['nick'] }}</p>
+    <p>Nombre: {{ usuario['nombre'] }} </p>
+    <p>Apellidos: {{ usuario['apellidos'] }} </p>
+    <p>Rol actual: {{ usuario['rol'] }} </p>
+    <form action="editarRol.php" method="post" >
+        <input type="text" value="{{ usuario['nick'] }}" name="nick" style="display: none;">
+        <input type="text" value="{{ usuario['rol'] }}" id="antiguo" name="antiguo" style="display: none;">
+        <label for="rol">Escoge nuevo rol:</label>
+        <select id="rol" name="rol" multiple>
+            <option value="registrado">Registrado</option>
+            <option value="super">Super Usuario</option>
+            <option value="moderador">Moderador</option>
+            <option value="gestor">Gestor</option>
+        </select>
+
+          <input type="submit" id="boton" onclick="comprobar()" value='Enviar' ">
+    </form>
+   
+ 
+    
+</div>
+{% endif %}
+{% endblock %}

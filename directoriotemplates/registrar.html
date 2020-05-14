@@ -1,0 +1,27 @@
+{% extends "padre.html" %}
+
+{% block css %}
+    {{ parent() }}
+<link rel="stylesheet" type="text/css" href="./css/login.css" media="screen" />
+<script type="text/javascript" src="./javascripts/registro.js"></script>
+
+{% endblock %}
+
+{% block registro %}
+<div class="clearfix" id="inisesion">
+    <form action="registro.php" method="post" >
+    Usuario: <input type="text" name="nick" id="user"/><br>
+    Password: <input type="password" name="contraseña" id="pass"/><br>
+    Repita la password: <input type="password" name="recontraseña" id="repass" /><br>
+    Mail:  <input type="email" name="mail" id="correo" /><br>
+    Nombre: <input type="text" name="nombre" id="name"/><br>
+    Apellidos: <input type="text" name="apellidos" id="subname"/><br>
+    Fecha nacimiento<input type="date" name="fecha" id="date"/><br>
+    <input type="submit" id="boton"  onclick= validar() value="Registrarse" />
+    {% if registro %}
+    <span style="color: red;" id="msg" >*El nombre de usuario ya existe</span>
+    {% endif %}
+    </form>
+
+</div>
+{% endblock %}

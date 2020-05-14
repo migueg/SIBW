@@ -16,12 +16,49 @@
         <header class="clearfix" >
             <div id="logo"><img src="./img/logo.png" width="100" heigt="50"></div>
             <h1>CRAZY OCIO</h1>
-
-            <div class="topnav clearfix">
+            
+            {% block login %}{% endblock %}
+           <!--
+            div class="topnav clearfix">
                 <a href="#">Link</a>
                 <a href="#">Link</a>
                 <a href="#">Link</a>
             </div>
+           --> 
+           {% if user.rol =="moderador" %}
+            <div class="topnav clearfix">
+                <a href="perfil.php">Miperfil</a>
+                <a href="listaComents.php">Lista Coments</a>
+                <a href="index.php">Eventos</a>
+            </div>
+            {% elseif user.rol =="registrado" %}
+            <div class="topnav clearfix">
+                <a href="perfil.php">Miperfil</a>
+                <a href="index.php">Eventos</a>
+            </div>
+            {% elseif user.rol =="gestor" %}
+            <div class="topnav clearfix">
+                <a href="perfil.php">Miperfil</a>
+                <a href="listaEventos.php">ListaEventos</a>
+                <a href="index.php">Eventos</a>
+                <a href="añadir.php">Crear Evento</a>
+            </div>
+            {% elseif user.rol =="super" %}
+            <div class="topnav clearfix">
+                <a href="perfil.php">Miperfil</a>
+                <a href="listaUsuarios.php">Usuarios</a>
+                <a href="index.php">Eventos</a>
+               
+            </div>
+            {% else %}
+            <div class="topnav clearfix">
+                <a href="registro.php">Registrar</a>
+                <a href="login.php">Iniciar Sesion</a>
+                <a href="index.php">Eventos</a>
+            </div>
+            {% endif %}
+
+
         </header>
         <div class="clearfix">
             <aside>
@@ -37,6 +74,12 @@
                 {% block central %}{% endblock %}
                 {% block comentarios %}{% endblock %}
                 {% block galeria %}{% endblock %}
+                {% block iniciosesion %}{% endblock %}
+                {% block registro %}{% endblock %}
+                {% block perfil %}{% endblock %}
+                {% block moderador %}{% endblock %}
+                {% block gestor %}{% endblock %}
+                {% block super %}{% endblock %}
             </main>
     
         </div>

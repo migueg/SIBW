@@ -1,0 +1,58 @@
+#inisesion {
+    float: left;
+    width: 50%;
+    margin-left: 7%;
+    padding-top: 2%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-bottom: 2%;
+    margin-top: 5%;
+    background-color: rgba(179, 230, 231, 0.575);
+    border-radius: 20%;
+    border-style: ridge;
+}
+
+#inisesion form input{
+    width: 95%;
+} 
+
+#inisesion form #boton{
+    width: 33%;
+    margin-top: 5%;
+    margin-left: 33%;
+    margin-bottom: 2%;
+}
+
+#inisesion a{
+    width: 33%;
+    float: left;
+    margin-left: 35%;
+    margin-top: 8%;
+   
+}
+
+#inisesion #msg{
+    float: left;
+}
+
+#inisesion h1{
+    color:black;
+margin-bottom: 1%;
+}
+
+.mensaje {
+    float: left;
+    width: 20%;
+    
+    font-weight: bold;
+    font-size: 150%;
+    margin-left: 20%;
+    padding-top: 2%;
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-bottom: 2%;
+    margin-top: 5%;
+    background-color: rgba(179, 230, 231, 0.575);
+    border-radius: 20%;
+    border-style: ridge;
+}

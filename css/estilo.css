@@ -11,7 +11,7 @@ header {
     top: 0;
     
     background-color: rgba(179, 171, 171, 0.507);
-    font-size: 20px;
+
 	color: #FFFFFF;
 	text-align: center;
 
@@ -20,10 +20,27 @@ header {
 }
 
 header h1{
+	padding-top: 30px;
 	margin-top: 0;
 	margin-bottom: 0;
 }
- 
+
+.login {
+	position: relative;
+	padding-left: 85%;
+	width: 15%;
+}
+.login a {
+	float: right;
+	width: 40%;
+	margin-top: 20px;
+
+}
+.login p {
+	float: right;
+	
+	
+}
 /*Menu horizontal */
 .topnav {
 	overflow: hidden;
@@ -180,6 +197,7 @@ header nav {
 	margin-inline-end: unset;
 	margin-block-end: unset;
 	margin-block-start: 1%;
+	width: 50%;
   }
 
   .evento h2{
@@ -193,7 +211,7 @@ header nav {
 	margin-block-end: unset;
 	margin-block-start: 1%;
   }
-  .evento h3{
+  .evento h3 {
 	font-style: normal;
 	font-weight:bold;
 	font-size: 120%;
@@ -203,6 +221,19 @@ header nav {
 	margin-inline-end: unset;
 	margin-block-end: unset;
 	margin-block-start: 1%;
+  }
+  .evento h4 {
+	font-style: normal;
+	font-weight:bold;
+	font-size: 100%;
+	color:#ffffff;
+	margin-left: 5%;
+	margin-inline-start: 5%;
+	margin-inline-end: unset;
+	margin-block-end: unset;
+	margin-block-start: 1%;
+	
+
   }
 
   .evento p{
@@ -311,4 +342,17 @@ header nav {
 
 .imprimir a:hover, a:active {
   background-color: #25e7f579;
+}
+
+.gestor {
+	float: right;
+	width: 33%;
+}
+
+
+.gestor a{
+	float: right;
+	margin-left: 10%;
+	margin-top: 5%;
+	
 }

@@ -1,0 +1,41 @@
+{% extends "padre.html" %}
+
+{% block css %}
+    {{ parent() }}
+<link rel="stylesheet" type="text/css" href="./css/login.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="./css/listaComents.css" media="screen" />
+<script type="text/javascript" src="./javascripts/buscar.js"></script>
+
+{% endblock %}
+
+{% block login %}
+
+<div class = "login ">
+   
+    <p>{{ user.usuario }}</p>
+    <a href= "logout.php"><img src="./img/cerrarSesion.png" width="20px" alt="Cerrar sesion"></a>
+   
+</div>
+
+{% endblock %}
+{% block gestor %}
+<div class="tabla" id="table">
+    <input type="text" id="busca" onkeyup="busca()" placeholder="Busca por nombre de etiqueta">
+    <table>
+        <tr style="text-align: center;font-weight:bold ;">
+            <th> Titulo</th>
+            <th> Etiquetas</th>
+            <th> Identificador</th>
+          
+        </tr>
+        {% for evento in eventos %}
+            <tr >
+                <td> {{ evento['titulo'] }}</td>
+                <td> {{ evento['etiquetas'] }}</td>
+                <td> <a style="color: seashell;" href="plantillaEvento.php?ev={{ evento['id'] }}">{{ evento['id'] }}</a></td>
+               
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

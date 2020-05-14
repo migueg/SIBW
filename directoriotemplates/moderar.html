@@ -1,0 +1,44 @@
+{% extends "padre.html" %}
+
+{% block css %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="./css/moderar.css" media="screen" />
+    <script type="text/javascript" src="./javascripts/Comentarios.js"></script>
+
+{% endblock %}
+
+{% block login %}
+
+<div class = "login ">
+    {% if not user %}
+    <a href= "login.php">Inicia sesion</a>
+    {% else %}
+    <p>{{ user['usuario'] }}</p>
+    <a href= "logout.php"><img src="./img/cerrarSesion.png" width="20px" alt="Cerrar sesion"></a>
+    {% endif %}
+</div>
+{% endblock %}
+{% block moderador %}
+{% if user.rol == "moderador" %}
+<div class="moderador">
+    {% if coment %}
+   <p>Comentario de : {{ coment['nomcoment'] }}</p>
+   <p>Hora de publicación: {{ coment['hora'] }}</p>
+   <p>Fecha de publicación: {{ coment['fecha'] }}</p>
+     
+    <form action="moderar.php?nombre={{ coment['nomcoment'] }}&fecha={{ coment['fecha'] }}&hora={{ coment['hora'] }}" method="POST">
+        <input type="text" id="antiguo" value="{{ coment['comentario'] }}" style="display: none;">
+        <textarea id="comentario" name="coment">{{ coment['comentario'] }}</textarea><br>
+    <input type="submit" onclick="comprobarComent()" id="boton" value="editar" rows="20" cols="40" >
+    </form>
+    {% else %}
+        <p>¡¡¡Comentario editado con exito!!!</p>
+        <a href="plantillaEvento.php?ev={{ id }}">Volver</a>
+    {% endif %}
+
+</div>
+
+{% endif %}
+
+
+{% endblock %}
