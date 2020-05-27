@@ -14,13 +14,34 @@
         }else{
             $idEv = -1;
         }
-    
+        
+      
+        $mensaje = '';
+
         $usuario = iniSesion();
         $mysqli = conexion();
         $evento = getEvento($idEv, $mysqli);
         $comentarios = getListaComents($idEv , $mysqli);
         $galeria = getGaleria($mysqli,$idEv);
-        echo $twig->render('plantillaEvento.html',['evento' => $evento,'comentarios' => $comentarios, 'galeria' => $galeria , 'user'=>$usuario]);
+       
+      
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $datos['titulo'] = $evento['titulo'];
+            $datos['img'] = $evento['im1'];
+
+            publicar($mysqli,$idEv,$datos);
+
+            $mensaje = 'publicado';
+        }
+
+
+        $publicado = getPublicado($mysqli, $idEv);
+        if($publicado || $usuario['rol'] == 'gestor'){
+            echo $twig->render('plantillaEvento.html',['mensaje' =>$mensaje,'evento' => $evento,'comentarios' => $comentarios, 'galeria' => $galeria, 'publicado' => $publicado, 'user'=>$usuario]);
+        }else{
+            echo $twig->render('eventoNodisponible.html',[ 'user'=>$usuario]);
+        }
+      
     ?>
   
     

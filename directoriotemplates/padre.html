@@ -30,11 +30,14 @@
                 <a href="perfil.php">Miperfil</a>
                 <a href="listaComents.php">Lista Coments</a>
                 <a href="index.php">Eventos</a>
+                <a href="busqueda.php">Búsqueda</a>
             </div>
             {% elseif user.rol =="registrado" %}
             <div class="topnav clearfix">
                 <a href="perfil.php">Miperfil</a>
                 <a href="index.php">Eventos</a>
+                <a href="busqueda.php">Búsqueda</a>
+
             </div>
             {% elseif user.rol =="gestor" %}
             <div class="topnav clearfix">
@@ -42,12 +45,16 @@
                 <a href="listaEventos.php">ListaEventos</a>
                 <a href="index.php">Eventos</a>
                 <a href="añadir.php">Crear Evento</a>
+                <a href="busqueda.php">Búsqueda</a>
+
             </div>
             {% elseif user.rol =="super" %}
             <div class="topnav clearfix">
                 <a href="perfil.php">Miperfil</a>
                 <a href="listaUsuarios.php">Usuarios</a>
                 <a href="index.php">Eventos</a>
+                <a href="busqueda.php">Búsqueda</a>
+
                
             </div>
             {% else %}
@@ -55,6 +62,8 @@
                 <a href="registro.php">Registrar</a>
                 <a href="login.php">Iniciar Sesion</a>
                 <a href="index.php">Eventos</a>
+                <a href="busqueda.php">Búsqueda</a>
+
             </div>
             {% endif %}
 

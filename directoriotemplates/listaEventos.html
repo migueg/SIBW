@@ -25,6 +25,7 @@
         <tr style="text-align: center;font-weight:bold ;">
             <th> Titulo</th>
             <th> Etiquetas</th>
+            <th> Publicado </th>
             <th> Identificador</th>
           
         </tr>
@@ -32,8 +33,13 @@
             <tr >
                 <td> {{ evento['titulo'] }}</td>
                 <td> {{ evento['etiquetas'] }}</td>
+                {% if evento.publicado %}
+                <td>SI</td>
+                {% else %}
+                <td>NO</td>
+                {% endif %}
                 <td> <a style="color: seashell;" href="plantillaEvento.php?ev={{ evento['id'] }}">{{ evento['id'] }}</a></td>
-               
+
             </tr>
         {% endfor %}
     </table>

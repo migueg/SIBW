@@ -1,7 +1,7 @@
 <?php
      
 
-    include("../conexionbd.php");
+    require_once 'conexionbd.php';
     function console_log( $data ){
         echo '<script>';
         echo 'console.log('. json_encode( $data ) .')';

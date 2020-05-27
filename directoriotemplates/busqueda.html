@@ -1,0 +1,49 @@
+{% extends "padre.html" %}
+
+{% block css %}
+    {{ parent() }}
+<link rel="stylesheet" type="text/css" href="./css/login.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="./css/listaComents.css" media="screen" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="./javascripts/buscar.js"></script>
+
+{% endblock %}
+
+{% block login %}
+
+<div class = "login ">
+   
+    <p>{{ user.usuario }}</p>
+    <a href= "logout.php"><img src="./img/cerrarSesion.png" width="20px" alt="Cerrar sesion"></a>
+   
+</div>
+
+{% endblock %}
+{% block central %}
+<div class="tabla" id="table">
+<input type ="text" id="rol" value="{{ user.rol }}" style="display: none;">
+{% if user.rol == "gestor" %}
+<input type="text" id="busca" onkeyup="buscaEventoGestor()" placeholder="Busca el evento por su titulo">
+{% else %}
+<input type="text" id="busca" onkeyup="buscaEvento()" placeholder="Busca el evento por su titulo">
+{% endif %}
+
+ 
+<div id="mensaje" style="display: none;">Obteniendo datos, espere por favor...</div>
+<style>
+    #tabla img{
+        width: 150px;
+
+    }
+</style>
+<table id="tabla">
+    <tbody>
+
+    </tbody>
+</table>
+
+  
+
+
+</div>
+{% endblock %}

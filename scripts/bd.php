@@ -70,6 +70,18 @@ function getGaleria($mysqli, $idEv){
     $stmt->close();
 }
 
+function getPublicado($mysqli, $idEv){
+    $stmt = $mysqli->prepare("SELECT publicado FROM evento where id=? ");
+    $stmt->bind_param("i",$idEv);
+    $stmt->execute();
+    $consulta = $stmt->get_result();
+    $publicado = $consulta->fetch_assoc();
+    $stmt->close();
+
+    return $publicado;
+
+}
+
 function getAllComents($mysqli){
     $stmt = $mysqli->prepare("SELECT * FROM comentarios  ORDER BY fecha, hora ASC");
     $stmt->execute();
@@ -87,5 +99,22 @@ function getAllComents($mysqli){
    
 }
 
+function publicar($mysqli , $idEv, $datos){
+    $titulo = $datos['titulo'];
+    $img = $datos['img'];
+
+    $stmt = $mysqli->prepare("INSERT INTO listaeventos (id,titulo,ruta,img) 
+    values (?,'$titulo','plantillaEvento.php','$img')");
+    $stmt->bind_param("i",$idEv);
+
+    $stmt->execute();
+    $stmt->close();
+
+    $stmt = $mysqli->prepare("UPDATE evento set publicado=1 where id=?");
+    $stmt->bind_param("i",$idEv);
+
+    $stmt->execute();
+    $stmt->close();
+}
 
 ?>

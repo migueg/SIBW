@@ -19,3 +19,64 @@ function busca(){
     }
 
 }
+
+function buscaEvento(){
+  input = document.getElementById("busca");
+  rol = document.getElementById('rol').value;
+  titulo = input.value.toUpperCase();
+
+  $.ajax({
+    data: {titulo , rol},
+    url: './scripts/buscar.php',
+    type: 'get',
+    beforeSend: function () {
+      $("#mensaje").show();
+    },
+    success: function(respuesta) {
+      procesaRespuestaAjax(respuesta);
+      $("#mensaje").hide();
+    }
+  });
+}
+  function buscaEventoGestor(){
+    input = document.getElementById("busca");
+    rol = document.getElementById('rol').value;
+    titulo = input.value.toUpperCase();
+  
+    $.ajax({
+      data: {titulo , rol},
+      url: './scripts/buscar.php',
+      type: 'get',
+      beforeSend: function () {
+        $("#mensaje").show();
+      },
+      success: function(respuesta) {
+        procesaRespuestaAjaxGestor(respuesta);
+        $("#mensaje").hide();
+      }
+    });
+  }
+
+
+  function procesaRespuestaAjax(respuesta){
+    res = "";
+
+    for(i = 0 ; i < respuesta.length ; i++){
+        res += "<tr><td>" + "<img src='"+ respuesta[i].img + "'></td><td>" + "<a href='plantillaevento.php?ev=" +
+        respuesta[i].id +"'>" + respuesta[i].titulo + "</td></tr>\n";
+    }
+    $("#tabla > tbody").html(res);
+  }
+
+  function procesaRespuestaAjaxGestor(respuesta){
+    res = "";
+
+    for(i = 0 ; i < respuesta.length ; i++){
+        res += "<tr><td>" + "<img src='"+ respuesta[i].im1 + "'></td><td>" + "<a href='plantillaevento.php?ev=" +
+        respuesta[i].id +"'>" + respuesta[i].titulo + "</td></tr>\n";
+    }
+    $("#tabla > tbody").html(res);
+  }
+
+
+

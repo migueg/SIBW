@@ -63,12 +63,17 @@ function addEvento($args){
     $img2 = $ruta.$args['img2'];
     $fecha =  $args['fecha'];
     $id = getIdEv();
-
+    $publicado = $args['publicar'];
+    if($publicado == 'si'){
+        $publicado = 1;
+    }else{
+        $publicado = 0;
+    }
     $stmt =  $mysqli->prepare("INSERT INTO evento (id, titulo, 
     organizador, fecha, im1, im2, textoim1
     , textoim2, descripcion1, descripcion2, enlaceweb,
-     enlaceorganizador, enlaceTwitter, enlaceFace, etiquetas) VALUES
-    ($id, ?, ?,'$fecha', '$img1', '$img2', ?, ?,?,?,?,?,?,?,?)");
+     enlaceorganizador, enlaceTwitter, enlaceFace, etiquetas, publicado) VALUES
+    ($id, ?, ?,'$fecha', '$img1', '$img2', ?, ?,?,?,?,?,?,?,? ,$publicado)");
 
     $stmt->bind_param('sssssssssss',$args['titulo'], $args['organizador']
     , $args['t1'], $args['t2'], $args['d1'],  $args['d2'], $args['web']
@@ -77,16 +82,19 @@ function addEvento($args){
     if(!$stmt->execute()){
         exit("Error");
     }else{
-        $stmt = $mysqli->prepare("INSERT INTO listaeventos(id,titulo,ruta,img) VALUES 
-        ($id,?,'plantillaEvento.php', '$img1')" );
-        
-        $stmt->bind_param('s',$args['titulo']);
-
-        if(!$stmt->execute()){
-            exit("Error2");
+        if($publicado){
+            $stmt = $mysqli->prepare("INSERT INTO listaeventos(id,titulo,ruta,img) VALUES 
+            ($id,?,'plantillaEvento.php', '$img1')" );
+            
+            $stmt->bind_param('s',$args['titulo']);
+    
+            if(!$stmt->execute()){
+                exit("Error2");
+            }
+    
+            $stmt->close();
         }
-
-        $stmt->close();
+      
     }
 }
 function borraImagenes($id){
@@ -100,12 +108,15 @@ function borraImagenes($id){
     unlink($img['im1']); //borro las imagenes 
     unlink($img['im2']);
 }
-function borraEvento($id){
+function borraEvento($id, $publicado){
     global $mysqli;
 
     borraImagenes($id);
-    $stmt = $mysqli->prepare("DELETE FROM listaeventos where id=$id");
-    $stmt->execute();
+    if($publicado){
+        $stmt = $mysqli->prepare("DELETE FROM listaeventos where id=$id");
+        $stmt->execute();
+    }
+   
     $stmt = $mysqli->prepare("DELETE FROM evento where id=$id");
     if(!$stmt->execute()){
         
@@ -172,6 +183,8 @@ function guardaEngaleria($row, $id){
     $errors=[];
     $rutas = [];
     $cantidad = count($row['tmp_name']);
+    if($cantidad > 0) {
+    
     for($i=0 ; $i<$cantidad ; $i++){
        
             $filename = $row["name"][$i];
@@ -208,7 +221,7 @@ function guardaEngaleria($row, $id){
             
     }
     global $mysqli;
-    
+ if(isset($ruta['ruta'])){
     for($a=0 ; $a<$cantidad ; $a++){
         $r =   $ruta['ruta'][$a];
         
@@ -219,15 +232,20 @@ function guardaEngaleria($row, $id){
         $stmt->execute();
     }
 
-    $stmt->close();
-        
+
+
+$stmt->close();
+}     
+
+ }
+      
 }
 
 
 function getAllEventos(){
     global $mysqli;
     $ev = array();
-    $stmt = $mysqli->prepare("SELECT id,titulo,etiquetas from evento order by id ASC ");
+    $stmt = $mysqli->prepare("SELECT id,titulo,etiquetas,publicado from evento order by id ASC ");
     $stmt->execute();
     $res = $stmt->get_result();
 

@@ -12,6 +12,7 @@
         $mensaje ="";
         $e = array();
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            
             if(isset($_FILES['imagen1'])){
                
                 if($_FILES['imagen1']['name']){
@@ -47,6 +48,7 @@
                 $args['twit'] = $_POST['twit'];
                 $args['face'] = $_POST['face'];
                 $args['etq'] = $_POST['etq'];
+                $args['publicar'] = $_POST['publicar'];
 
                 if(sizeof($e) == 0){
                     addEvento($args);

@@ -35,8 +35,21 @@
 {% endblock %}
 
 {% block central %}
+
 <div class= "evento clearfix">
     {% if user.rol == "gestor" %}
+    <div class="publicar">
+        {% if not publicado.publicado %}
+            <form action="plantillaEvento.php?ev={{ evento['id']}}" method="POST">
+                <input type="submit" value="+PUBLICAR" name="publicar">
+            </form>
+        {% endif %}
+    {% if mensaje %}
+        <script>
+            alert("El evento ha sido publicado con exito!! ");
+        </script>
+    {% endif %}
+    </div>
     <div class="gestor">
         <a href="javascript:" onclick="deleteComent('borrarEvento.php?ev={{ evento['id'] }}')"><img id='borrar' src="./img/borrar.png"  width="40px"></a>
         <a href="editarEvento.php?ev={{ evento['id'] }}" id="edit" > <img src="./img/editar.png" width="40px"> </a>
@@ -155,7 +168,6 @@
    
   </div>
 
-  
 
 {% endblock %}
 
@@ -180,6 +192,5 @@
       
       <button class="abrir" onclick="abrir()">&#9776; Galeria</button>
 </div>
-
 
 {% endblock  %}
